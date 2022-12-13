@@ -36,6 +36,7 @@ const operate = (operator, num1, num2) => {
 const mainDisplay = document.querySelector('.main-display');
 const secondDisplay = document.querySelector('.second-display');
 const numberButton = document.querySelectorAll('.number');
+const operatorButton = document.querySelectorAll('.operator');
 const clearButton = document.querySelector('.clear');
 
 mainDisplay.textContent = '0';
@@ -68,8 +69,28 @@ numberButton.forEach((button) => {
   });
 });
 
-clearButton.addEventListener('click', () => {
+operatorButton.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (firstDigit) {
+      currentDisplay = operate(operator, firstDigit, Number(currentDisplay));
+      mainDisplay.textContent = currentDisplay;
+      secondDisplay.textContent = currentDisplay + operator;
+    }
+
+    secondDisplay.textContent = currentDisplay + e.target.dataset.operator;
+    firstDigit = Number(currentDisplay);
+    operator = e.target.dataset.operator;
+    currentDisplay = '0';
+  });
+});
+
+clearButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
   mainDisplay.textContent = '0';
+  secondDisplay.textContent = '';
 
   currentDisplay = '';
   firstDigit = null;
