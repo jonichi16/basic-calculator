@@ -27,18 +27,26 @@ html {
 }
 
 .calculator-display {
-  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 24px 0;
+  padding: 0 12px;
+  background-color: #42f721;
+  font-family: 'Share Tech Mono', monospace;
+  box-shadow: 0 0 10px 2px #22d631;
 }
 
-.display {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  background-color: #42f721;
-  padding: 0 12px;
-  font-family: 'Share Tech Mono', monospace;
+.main-display {
   font-size: 72px;
-  box-shadow: 0 0 10px 2px #22d631;
+  line-height: 72px;
+  min-height: 72px;
+}
+
+.second-display {
+  font-size: 48px;
+  line-height: 48px;
+  min-height: 48px;
 }
 
 .calculator-button {
