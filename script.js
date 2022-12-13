@@ -35,7 +35,9 @@ const operate = (operator, num1, num2) => {
 
 const mainDisplay = document.querySelector('.main-display');
 const secondDisplay = document.querySelector('.second-display');
-const buttons = document.querySelectorAll('button');
+const numberButton = document.querySelectorAll('.number');
+const clearButton = document.querySelector('.clear');
+
 mainDisplay.textContent = '0';
 
 let currentDisplay = '';
@@ -59,9 +61,19 @@ const inputDigit = (input) => {
   mainDisplay.textContent = currentDisplay;
 };
 
-buttons.forEach((button) => {
+numberButton.forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
     inputDigit(e.target.value);
   });
+});
+
+clearButton.addEventListener('click', () => {
+  mainDisplay.textContent = '0';
+
+  currentDisplay = '';
+  firstDigit = null;
+  secondDigit = null;
+  operator = '';
+  isFirstDigit = true;
 });
