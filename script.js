@@ -71,6 +71,7 @@ numberButton.forEach((button) => {
     e.preventDefault();
     inputDigit(e.target.value);
     isOperator = false;
+    console.log(isOperator);
   });
 });
 
@@ -86,11 +87,12 @@ operatorButton.forEach((button) => {
       answer = operate(operator, firstDigit, Number(currentDisplay));
     }
 
+    // This will create a new instance when equal was used
     if (answer !== undefined) {
       firstDigit = answer;
       mainDisplay.textContent = answer;
     } else if (operator === '=') {
-      firstDigit = firstDigit;
+      firstDigit = Number(currentDisplay);
     } else {
       firstDigit = Number(currentDisplay);
     }
@@ -99,11 +101,6 @@ operatorButton.forEach((button) => {
     currentDisplay = '0';
     secondDisplay.textContent = firstDigit + operator;
     isOperator = true;
-
-    console.log(firstDigit);
-    console.log(operator);
-    console.log(answer);
-    console.log(isOperator);
   });
 });
 
