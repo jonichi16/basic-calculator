@@ -13,7 +13,11 @@ const multiply = (num1, num2) => {
 };
 
 const divide = (num1, num2) => {
-  return num1 / num2;
+  if (num1 === 0) {
+    return 'ERROR';
+  } else {
+    return num1 / num2;
+  }
 };
 
 const operate = (operator, num1, num2) => {
@@ -44,7 +48,6 @@ mainDisplay.textContent = '0';
 let currentDisplay = '';
 let answer = null;
 let firstDigit = null;
-let secondDigit = null;
 let operator = null;
 
 const inputDigit = (input) => {
@@ -75,9 +78,11 @@ operatorButton.forEach((button) => {
 
     answer = operate(operator, firstDigit, Number(currentDisplay));
 
-    if (answer) {
+    if (answer !== undefined) {
       firstDigit = answer;
       mainDisplay.textContent = answer;
+    } else if (operator === '=') {
+      firstDigit = firstDigit;
     } else {
       firstDigit = Number(currentDisplay);
     }
@@ -86,11 +91,8 @@ operatorButton.forEach((button) => {
     currentDisplay = '0';
     secondDisplay.textContent = firstDigit + operator;
 
-    console.log('firstdigit ' + firstDigit);
-    console.log('operator ' + operator);
-    console.log('seconddigit ' + secondDigit);
-    console.log('answer ' + answer);
-    console.log('currentdisplay ' + currentDisplay);
+    console.log(firstDigit);
+    console.log(operator);
   });
 });
 
@@ -103,6 +105,5 @@ clearButton.addEventListener('click', (e) => {
   currentDisplay = '';
   answer = null;
   firstDigit = null;
-  secondDigit = null;
   operator = '';
 });
