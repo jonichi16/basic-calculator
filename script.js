@@ -27,7 +27,7 @@ const operate = (operator, num1, num2) => {
     case '÷':
       return divide(num1, num2);
     default:
-      return;
+      return add(num1, num2);
   }
 };
 
@@ -43,7 +43,6 @@ mainDisplay.textContent = '0';
 
 let currentDisplay = '';
 let firstDigit = null;
-let secondDigit = null;
 let operator = '';
 let isFirstDigit = true;
 
@@ -72,6 +71,7 @@ numberButton.forEach((button) => {
 operatorButton.forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
+    if (!currentDisplay) return;
 
     if (firstDigit) {
       currentDisplay = operate(operator, firstDigit, Number(currentDisplay));
@@ -83,6 +83,10 @@ operatorButton.forEach((button) => {
     firstDigit = Number(currentDisplay);
     operator = e.target.dataset.operator;
     currentDisplay = '0';
+
+    console.log(firstDigit);
+    console.log(operator);
+    console.log(currentDisplay);
   });
 });
 
@@ -94,7 +98,6 @@ clearButton.addEventListener('click', (e) => {
 
   currentDisplay = '';
   firstDigit = null;
-  secondDigit = null;
   operator = '';
   isFirstDigit = true;
 });
