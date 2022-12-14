@@ -48,7 +48,9 @@ mainDisplay.textContent = '0';
 let currentDisplay = '';
 let answer = null;
 let firstDigit = null;
+let secondDigit = null;
 let operator = null;
+let isOperator = false; // * Check if last input is operator
 
 const inputDigit = (input) => {
   if (currentDisplay.length >= 11) return;
@@ -68,6 +70,7 @@ numberButton.forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
     inputDigit(e.target.value);
+    isOperator = false;
   });
 });
 
@@ -76,7 +79,12 @@ operatorButton.forEach((button) => {
     e.preventDefault();
     if (!currentDisplay && !firstDigit) return;
 
-    answer = operate(operator, firstDigit, Number(currentDisplay));
+    // This will prevent using operate function when last input is operator
+    if (isOperator && operator !== '=') {
+      answer = firstDigit;
+    } else {
+      answer = operate(operator, firstDigit, Number(currentDisplay));
+    }
 
     if (answer !== undefined) {
       firstDigit = answer;
@@ -90,9 +98,12 @@ operatorButton.forEach((button) => {
     operator = e.target.dataset.operator;
     currentDisplay = '0';
     secondDisplay.textContent = firstDigit + operator;
+    isOperator = true;
 
     console.log(firstDigit);
     console.log(operator);
+    console.log(answer);
+    console.log(isOperator);
   });
 });
 
@@ -106,4 +117,5 @@ clearButton.addEventListener('click', (e) => {
   answer = null;
   firstDigit = null;
   operator = '';
+  isOperator = false;
 });
