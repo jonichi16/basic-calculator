@@ -27,7 +27,7 @@ const operate = (operator, num1, num2) => {
     case '÷':
       return divide(num1, num2);
     default:
-      return add(num1, num2);
+      return;
   }
 };
 
@@ -42,13 +42,13 @@ const clearButton = document.querySelector('.clear');
 mainDisplay.textContent = '0';
 
 let currentDisplay = '';
+let answer = null;
 let firstDigit = null;
-let operator = '';
-let isFirstDigit = true;
+let secondDigit = null;
+let operator = null;
 
 const inputDigit = (input) => {
   if (currentDisplay.length >= 11) return;
-  if (input === '0' && currentDisplay === '0') return;
   if (input === '.' && currentDisplay.includes('.')) return;
   if (input === '.' && currentDisplay === '') {
     currentDisplay = '0';
@@ -71,22 +71,26 @@ numberButton.forEach((button) => {
 operatorButton.forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
-    if (!currentDisplay) return;
+    if (!currentDisplay && !firstDigit) return;
 
-    if (firstDigit) {
-      currentDisplay = operate(operator, firstDigit, Number(currentDisplay));
-      mainDisplay.textContent = currentDisplay;
-      secondDisplay.textContent = currentDisplay + operator;
+    answer = operate(operator, firstDigit, Number(currentDisplay));
+
+    if (answer) {
+      firstDigit = answer;
+      mainDisplay.textContent = answer;
+    } else {
+      firstDigit = Number(currentDisplay);
     }
 
-    secondDisplay.textContent = currentDisplay + e.target.dataset.operator;
-    firstDigit = Number(currentDisplay);
     operator = e.target.dataset.operator;
     currentDisplay = '0';
+    secondDisplay.textContent = firstDigit + operator;
 
-    console.log(firstDigit);
-    console.log(operator);
-    console.log(currentDisplay);
+    console.log('firstdigit ' + firstDigit);
+    console.log('operator ' + operator);
+    console.log('seconddigit ' + secondDigit);
+    console.log('answer ' + answer);
+    console.log('currentdisplay ' + currentDisplay);
   });
 });
 
@@ -97,7 +101,8 @@ clearButton.addEventListener('click', (e) => {
   secondDisplay.textContent = '';
 
   currentDisplay = '';
+  answer = null;
   firstDigit = null;
+  secondDigit = null;
   operator = '';
-  isFirstDigit = true;
 });
