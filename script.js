@@ -81,7 +81,7 @@ operatorButton.forEach((button) => {
     if (!currentDisplay && !firstDigit) return;
 
     // This will prevent using operate function when last input is operator
-    if (isOperator && operator !== '=') {
+    if (isOperator) {
       answer = firstDigit;
     } else {
       answer = operate(operator, firstDigit, Number(currentDisplay));
