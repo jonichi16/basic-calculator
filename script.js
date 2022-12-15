@@ -5,9 +5,9 @@ const roundOff = (num) => {
   let multiplier = 10000000000; // Convert num to how many decimal places to return
 
   for (let i = 0; i < length; i++) {
+    // To adjust decimal places when whole number is more than 1 digit
     multiplier /= 10;
   }
-
   if (num.toString().length > 11) {
     return Math.round((num + Number.EPSILON) * multiplier) / multiplier;
   } else {
