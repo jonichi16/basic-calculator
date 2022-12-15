@@ -65,3 +65,11 @@ button {
 .grid-span {
   grid-row: span 2;
 }
+
+.operator {
+  background-color: #ffe45c;
+}
+
+.clear {
+  background-color: #c25661;
+}
