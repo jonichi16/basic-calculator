@@ -49,7 +49,6 @@ mainDisplay.textContent = '0';
 let currentDisplay = '';
 let answer = null;
 let firstDigit = null;
-let secondDigit = null;
 let operator = null;
 let isOperator = false; // * Check if last input is operator
 
@@ -102,10 +101,6 @@ operatorButton.forEach((button) => {
     currentDisplay = '0';
     secondDisplay.textContent = firstDigit + operator;
     isOperator = true;
-
-    console.log(answer);
-    console.log(firstDigit);
-    console.log(operator);
   });
 });
 
