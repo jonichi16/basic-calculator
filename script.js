@@ -1,8 +1,15 @@
 // * Operators
 
 const roundOff = (num) => {
+  const length = num.toString().slice(0, num.toString().indexOf('.')).length;
+  let multiplier = 10000000000; // Convert num to how many decimal places to return
+
+  for (let i = 0; i < length; i++) {
+    multiplier /= 10;
+  }
+
   if (num.toString().length > 11) {
-    return Math.round((num + Number.EPSILON) * 1000000000) / 1000000000;
+    return Math.round((num + Number.EPSILON) * multiplier) / multiplier;
   } else {
     return num;
   }
