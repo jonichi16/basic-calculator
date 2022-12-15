@@ -41,6 +41,7 @@ const mainDisplay = document.querySelector('.main-display');
 const secondDisplay = document.querySelector('.second-display');
 const numberButton = document.querySelectorAll('.number');
 const operatorButton = document.querySelectorAll('.operator');
+const negativeButton = document.querySelectorAll('.negative-sign');
 const clearButton = document.querySelector('.clear');
 
 mainDisplay.textContent = '0';
@@ -71,7 +72,6 @@ numberButton.forEach((button) => {
     e.preventDefault();
     inputDigit(e.target.value);
     isOperator = false;
-    console.log(isOperator);
   });
 });
 
@@ -79,6 +79,7 @@ operatorButton.forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
     if (!currentDisplay && !firstDigit) return;
+    if (currentDisplay === '-') return;
 
     // This will prevent using operate function when last input is operator
     if (isOperator) {
@@ -101,6 +102,18 @@ operatorButton.forEach((button) => {
     currentDisplay = '0';
     secondDisplay.textContent = firstDigit + operator;
     isOperator = true;
+
+    console.log(answer);
+    console.log(firstDigit);
+    console.log(operator);
+  });
+});
+
+negativeButton.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentDisplay) return;
+    inputDigit('-');
   });
 });
 
