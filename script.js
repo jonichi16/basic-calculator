@@ -1,22 +1,30 @@
 // * Operators
 
+const roundOff = (num) => {
+  if (num.toString().length > 11) {
+    return Math.round((num + Number.EPSILON) * 1000000000) / 1000000000;
+  } else {
+    return num;
+  }
+};
+
 const add = (num1, num2) => {
-  return num1 + num2;
+  return roundOff(num1 + num2);
 };
 
 const subtract = (num1, num2) => {
-  return num1 - num2;
+  return roundOff(num1 - num2);
 };
 
 const multiply = (num1, num2) => {
-  return num1 * num2;
+  return roundOff(num1 * num2);
 };
 
 const divide = (num1, num2) => {
   if (num1 === 0) {
     return 'ERROR';
   } else {
-    return num1 / num2;
+    return roundOff(num1 / num2);
   }
 };
 
